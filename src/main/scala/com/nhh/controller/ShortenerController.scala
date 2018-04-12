@@ -3,21 +3,26 @@ package com.nhh.controller
 import java.net.URI
 import java.util.UUID
 
-import com.nhh.utilities.Storage
+import com.nhh.services.LinkService
 
 class ShortenerController extends ApplicationController {
 
+  val linkService = new LinkService
+
+  get ("/") {
+    s"Hi there are ${linkService.count.toString} objects in database"
+  }
+
   get("/:id") {
-    val id = UUID.fromString(params("id"))
-    val url = Storage.get(id)
-    redirect(url)
+    redirect(linkService.findById(UUID.fromString(params("id"))).toString)
   }
 
   post("/") {
-    val url = new URI(params("link"))
-    val id = UUID.randomUUID()
-    Storage.create(id, url.toString)
-    id.toString
+    linkService.createLink(new URI(params("link"))).toString
+  }
+
+  delete("/:id"){
+    linkService.deleteLink(UUID.fromString(params("id"))).toString
   }
 
 }

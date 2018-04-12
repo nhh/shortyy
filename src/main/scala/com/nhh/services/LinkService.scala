@@ -3,16 +3,27 @@ package com.nhh.services
 import java.net.URI
 import java.util.UUID
 
-import org.eclipse.jetty.http.HttpURI
+import com.nhh.utilities.Storage
 
 class LinkService {
 
-  def createLink(link : URI): Unit = {
+  private val storage = Storage
 
+  def createLink(link : URI): UUID = {
+    val id = UUID.randomUUID()
+    storage.create(id, link.toString)
   }
 
-  def getRedirectLink(uuid : UUID):  URI = {
-    new URI("https://hello-world.com")
+  def findById(id : UUID): URI = {
+    new URI(storage.get(id))
+  }
+
+  def deleteLink(id : UUID): URI = {
+    new URI(storage.delete(id))
+  }
+
+  def count : Integer = {
+    storage.count
   }
 
 }

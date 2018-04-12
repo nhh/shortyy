@@ -11,9 +11,9 @@ object Storage {
     // Optional?
   }
 
-  def create(id : UUID, value : String): String = {
+  def create(id : UUID, value : String): UUID = {
     STORAGE += id.toString -> value
-    value
+    id
   }
 
   def delete(id : UUID): String = {
@@ -23,6 +23,10 @@ object Storage {
 
   def update(id : UUID, value : String): String = {
     STORAGE(id.toString).replaceAll("*",value)
+  }
+
+  def count : Integer = {
+    STORAGE.size
   }
 
 }
