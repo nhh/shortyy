@@ -7,8 +7,7 @@ object Storage {
   private var STORAGE = Map("Genesis" -> "Block")
 
   def get(id : UUID): String = {
-    STORAGE.getOrElse(id.toString, "Not found!")
-    // Optional?
+    STORAGE.getOrElse(id.toString, "Not found")
   }
 
   def create(id : UUID, value : String): UUID = {

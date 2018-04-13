@@ -3,7 +3,7 @@ package com.nhh.services
 import java.net.URI
 import java.util.UUID
 
-import com.nhh.utilities.Storage
+import com.nhh.utilities.{Logger, Storage}
 
 class LinkService {
 
@@ -11,6 +11,7 @@ class LinkService {
 
   def createLink(link : URI): UUID = {
     val id = UUID.randomUUID()
+    Logger.info(s"${id.toString} -> ${link.toString}")
     storage.create(id, link.toString)
   }
 

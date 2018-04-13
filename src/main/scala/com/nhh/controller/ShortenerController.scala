@@ -21,7 +21,7 @@ class ShortenerController extends ApplicationController {
     linkService.createLink(new URI(params("link"))).toString
   }
 
-  delete("/:id"){
+  delete("/:id") {
     linkService.deleteLink(UUID.fromString(params("id"))).toString
   }
 
